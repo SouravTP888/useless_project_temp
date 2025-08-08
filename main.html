@@ -9,18 +9,83 @@
       font-weight: normal;
       font-style: normal;
     }
+    
     body {
       font-family: sans-serif;
       text-align: center;
-      background-image: url("SITEBG2.png");
-      background-size: 100% 150%;
       color: #fff;
       margin: 0;
       padding: 0;
+      overflow: hidden;
+      height: 100vh;
     }
+    
+    /* Animated gradient background */
+    .bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+    
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      animation: float linear infinite;
+    }
+    
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    
+    @keyframes float {
+      to {
+        transform: translateY(-100vh) rotate(360deg);
+      }
+    }
+    
     .container {
       margin-top: 20%;
+      position: relative;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      border-radius: 15px;
+      display: inline-block;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 1s ease;
     }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
     button {
       padding: 15px 30px;
       font-size: 1.2em;
@@ -29,34 +94,125 @@
       background: #28a745;
       color: white;
       cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
+    
     button:hover {
       background: #218838;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
+    
+    button:active {
+      transform: translateY(1px);
+    }
+    
+    button::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      border-radius: 100%;
+      transform: scale(1, 1) translate(-50%);
+      transform-origin: 50% 50%;
+    }
+    
+    button:focus:not(:active)::after {
+      animation: ripple 1s ease-out;
+    }
+    
+    @keyframes ripple {
+      0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+      }
+      100% {
+        transform: scale(20, 20);
+        opacity: 0;
+      }
+    }
+    
     /* Game section */
     #gameSection {
       display: none;
+      position: relative;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      border-radius: 15px;
+      margin: 20px auto;
+      max-width: 800px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 1s ease;
     }
+    
     video, canvas {
       display: inline-block;
       margin: 10px auto;
       border: 4px solid white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
     }
+    
+    video:hover, canvas:hover {
+      transform: scale(1.02);
+    }
+    
     .scoreboard {
       margin-top: 20px;
       font-size: 1.2em;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
     }
+    
     .scoreboard span {
       display: inline-block;
-      margin: 0 15px;
+      padding: 10px 20px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      min-width: 100px;
+      transition: all 0.3s ease;
+    }
+    
+    .scoreboard span:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    h1 {
+      font-family: fantasy;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #e60073, 0 0 20px #e60073;
+      }
+      to {
+        text-shadow: 0 0 10px #fff, 0 0 20px #ff4da6, 0 0 30px #ff4da6, 0 0 40px #ff4da6;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Animated background elements -->
+  <div class="bg"></div>
+  <div class="particles" id="particles"></div>
 
   <!-- First screen -->
   <div id="startSection" class="container">
-    <h1 style="font-family: fantasy">🎯 RED CAR BLUE CAR</h1>
+    <h1>🎯 RED CAR BLUE CAR</h1>
     <p>Click the button below to start the game!</p>
     <button onclick="startGame()">Start Game</button>
   </div>
@@ -80,6 +236,38 @@
   </div>
 
   <script>
+    // Create floating particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random size between 2px and 6px
+        const size = Math.random() * 4 + 2;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Random position
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.bottom = `-10px`;
+        
+        // Random animation duration between 10s and 20s
+        const duration = Math.random() * 10 + 10;
+        particle.style.animationDuration = `${duration}s`;
+        
+        // Random delay
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // Call on page load
+    window.onload = createParticles;
+
     function startGame() {
       document.getElementById('startSection').style.display = 'none';
       document.getElementById('gameSection').style.display = 'block';
@@ -92,6 +280,7 @@
       const ctx = canvas.getContext('2d');
 
       let scores = { Red: 0, Green: 0, Blue: 0 };
+      let lastColor = null;
 
       // Ask for camera access
       navigator.mediaDevices.getUserMedia({ video: true })
@@ -124,10 +313,27 @@
         else if (g > r && g > b) color = "Green";
         else color = "Blue";
 
-        scores[color]++;
-        document.getElementById('redScore').textContent = scores.Red;
-        document.getElementById('greenScore').textContent = scores.Green;
-        document.getElementById('blueScore').textContent = scores.Blue;
+        // Only update score if color has changed
+        if (color !== lastColor) {
+          scores[color]++;
+          document.getElementById('redScore').textContent = scores.Red;
+          document.getElementById('greenScore').textContent = scores.Green;
+          document.getElementById('blueScore').textContent = scores.Blue;
+          lastColor = color;
+        }
+        
+        // Change background color slightly based on dominant color
+        const bg = document.querySelector('.bg');
+        if (color === "Red") {
+          bg.style.animation = 'gradientBG 10s ease infinite';
+          bg.style.background = 'linear-gradient(-45deg, #ff4d4d, #e73c7e, #ff4d4d, #e73c7e)';
+        } else if (color === "Green") {
+          bg.style.animation = 'gradientBG 8s ease infinite';
+          bg.style.background = 'linear-gradient(-45deg, #4dff4d, #3ce77c, #4dff4d, #3ce77c)';
+        } else {
+          bg.style.animation = 'gradientBG 12s ease infinite';
+          bg.style.background = 'linear-gradient(-45deg, #4d4dff, #3c7ee7, #4d4dff, #3c7ee7)';
+        }
       }
 
       // Check every 500ms
