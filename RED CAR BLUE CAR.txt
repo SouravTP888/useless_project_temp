@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Colour Counter Game</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; background: #111; color: #fff; }
+    video, canvas { display: block; margin: 10px auto; border: 2px solid #fff; }
+    .scoreboard { margin-top: 20px; font-size: 1.2em; }
+    .scoreboard span { display: inline-block; margin: 0 15px; }
+  </style>
+</head>
+<body>
+  <h1>🎯 Colour Counter Game</h1>
+
+  <!-- Camera feed -->
+  <video id="video" width="320" height="240" autoplay></video>
+  
+  <!-- Canvas for processing frames (hidden) -->
+  <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+  
+  <!-- Scoreboard -->
+  <div class="scoreboard">
+    <span>🔴 Red: <b id="redScore">0</b></span>
+    <span>🟢 Green: <b id="greenScore">0</b></span>
+    <span>🔵 Blue: <b id="blueScore">0</b></span>
+  </div>
+
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    let scores = { Red: 0, Green: 0, Blue: 0 };
+
+    // Ask for camera access
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => { video.srcObject = stream; })
+      .catch(err => { alert("Camera access denied!"); console.error(err); });
+
+    function getMajorityColor() {
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = frame.data;
+
+      let r = 0, g = 0, b = 0, total = 0;
+
+      for (let i = 0; i < data.length; i += 4) {
+        r += data[i];
+        g += data[i + 1];
+        b += data[i + 2];
+        total++;
+      }
+
+      r /= total; g /= total; b /= total;
+
+      let color;
+      if (r > g && r > b) color = "Red";
+      else if (g > r && g > b) color = "Green";
+      else color = "Blue";
