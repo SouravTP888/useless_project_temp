@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MATRIX</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background-image: url("SITEBG2.png");
+      background-size: 100% 150%;
+      color: #fff;
+    }
+    .container {
+      margin-top: 20%;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      background: #28a745;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 style="font-family: fantasy">🎯 RED CAR BLUE CAR</h1>
+    <p>Click the button below to start the game!</p>
+    <button onclick="startGame()">Start Game</button>
+  </div>
+
+  <script>
+    function startGame() {
+      window.location.href = "TRY.html"; // Go to second page
+    }
+  </script>
+</body>
+</html>
