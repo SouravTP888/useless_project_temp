@@ -3,11 +3,26 @@
 <head>
   <title>RED CAR BLUE CAR</title>
   <style>
-    body { font-family: 'Franklin Gothic Medium';text-align: center; background-image:url("SITEBG2.png");
-  background-size: 100% 150%;color: azure;}
-    video, canvas { display: inline-block; margin: 10px auto; border: 4px solid white; }
-    .scoreboard { margin-top: 20px; font-size: 1.2em; }
-    .scoreboard span { display: inline-block; margin: 0 15px; }
+    body { 
+      font-family: 'Franklin Gothic Medium';
+      text-align: center; 
+      background-image: url("SITEBG2.png");
+      background-size: 100% 150%;
+      color: azure;
+    }
+    video, canvas { 
+      display: inline-block; 
+      margin: 10px auto; 
+      border: 4px solid white; 
+    }
+    .scoreboard { 
+      margin-top: 20px; 
+      font-size: 1.2em; 
+    }
+    .scoreboard span { 
+      display: inline-block; 
+      margin: 0 15px; 
+    }
   </style>
 </head>
 <body>
@@ -33,10 +48,10 @@
 
     let scores = { Red: 0, Green: 0, Blue: 0 };
 
-    // Ask for camera access with your code snippet
+    // Ask for camera access
     navigator.mediaDevices.getUserMedia({ video: true })
       .then(stream => {
-        document.querySelector("video").srcObject = stream;
+        video.srcObject = stream;
       })
       .catch(err => {
         console.error("Camera error:", err);
@@ -59,12 +74,10 @@
 
       r /= total; g /= total; b /= total;
 
-      let color;
-      if (r > g && r > b) color = "Red";
-      else if (g > r && g > b) color = "Green";
-      else color = "Blue";
+      // 🔵 Only increment blue regardless of majority color
+      scores.Blue++;
 
-      scores[color]++;
+      // Update display (Red & Green shown but never change)
       document.getElementById('redScore').textContent = scores.Red;
       document.getElementById('greenScore').textContent = scores.Green;
       document.getElementById('blueScore').textContent = scores.Blue;
