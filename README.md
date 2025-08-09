@@ -13,7 +13,7 @@
 - Member 2: Aswanth.s - College of engineering perumon
 
 ### Project Description
-A Site that lets you play a game where the camera is used to identify whether an object is red or blue but with a twist.
+A Site that lets you play a game where the camera is used to identify whether an object is red or blue but with a twist. Frorm the day we're born we walk in a path laid on for us by others , which makes us non-immune to the reality , So as long as we think outside the box and take a risk or a leap of faith we will never reach our full potential, similarly if we keep on playing the defective interface of the game hoping it will change you will be stuck forever , so Take that leap of faith and Find that secret button. 
 
 ### The Problem (that doesn't exist)
 The problem is how to waste time efficently.
@@ -37,10 +37,21 @@ For Hardware:
 ### Implementation
 For Software:
 # Installation
-[commands]
+
+# Create a project folder and go into it
+mkdir spector-scope
+cd spector-scope
+
+# Create package.json (optional, for later npm usage)
+npm init -y
+
+# Install a simple local dev server
+npm install --global live-server
+
 
 # Run
-[commands]
+live-server
+http://127.0.0.1:8080
 
 ### Project Documentation
 For Software:
