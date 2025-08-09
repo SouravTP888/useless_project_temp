@@ -46,7 +46,7 @@ For Software:
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1]("SS1.jpg")
+![Screenshot1]("https://drive.google.com/file/d/1K30PGpfvHJ8OIWKOvff9Imm3INYm5yKy/view?usp=drive_link")
 The Home page of our site.
 
 ![Screenshot2]("SS3.jpg")
