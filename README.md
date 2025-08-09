@@ -1,34 +1,33 @@
 <img width="3188" height="1202" alt="frame (3)" src="https://github.com/user-attachments/assets/517ad8e9-ad22-457d-9538-a9e62d137cd7" />
 
 
-# [Project Name] 🎯
+# SPECTOR SCOPE 🎯
 
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: PHOENIX
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team Lead: Sourav.T.P - College of engineering perumon
+- Member 2: Aswanth.s - College of engineering perumon
 
 ### Project Description
-[2-3 lines about what your project does]
+A Site that lets you play a game where the camera is used to identify whether an object is red or blue but with a twist.
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+The problem is how to waste time efficently.
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+Even the game you play is useless until you figure out the message
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+- HTML,CSS,JAVASCRIPT.
+- No Frameworks 
+- No Libraries
+- Chrome Devtools,VS code,Git.
 
 For Hardware:
 - [List main components]
@@ -47,14 +46,17 @@ For Software:
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+![Screenshot1]("SS1.jpg")
+The Home page of our site.
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+![Screenshot2]("SS3.jpg")
+The defective game which only counters blue.
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+![Screenshot3]("SS4.jpg")
+The secret button to be found at the top right corner.
+
+![screenshot4]("SS2.jpg")
+The real game which works perfectly.
 
 # Diagrams
 ![Workflow](Add your workflow/architecture diagram here)
@@ -81,8 +83,8 @@ For Hardware:
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
+https://drive.google.com/file/d/1sEBTblZsCa60D-OhAah4NWYNTbUb7ZiN/view?usp=drive_link
+In the video , We enter the fake game through the main initiate system button and plays the game which only increments blue counter then we terminates the game , returns to home and finds the real button , finally directing us to the original game.
 
 # Additional Demos
 [Add any extra demo materials/links]
