@@ -5,6 +5,8 @@ let lastFrame = null;
 let motionDetected = false;
 let motionLevel = 0;
 let defectiveMode = true;
+let lastDetectedColor = null; // Track the last detected color
+let colorChanged = false; // Track if color has changed
 
 // DOM elements
 const video = document.getElementById('video');
@@ -161,6 +163,8 @@ function resetGame() {
   motionLevel = 0;
   motionValueElement.textContent = "0%";
   updateCurrentColor("NONE");
+  lastDetectedColor = null;
+  colorChanged = false;
 }
 
 // Stop the game
@@ -244,6 +248,7 @@ function detectColor() {
   
   if (!motionDetected) {
     updateCurrentColor("NONE");
+    colorChanged = false;
     return;
   }
   
@@ -269,9 +274,18 @@ function detectColor() {
     color = "Blue";
   }
   
+  // Check if color has changed
+  if (color !== lastDetectedColor) {
+    colorChanged = true;
+    lastDetectedColor = color;
+  } else {
+    colorChanged = false;
+  }
+  
   updateCurrentColor(color);
   
-  if (color !== "None") {
+  // Only increment if color changed and motion is detected
+  if (colorChanged && color !== "None") {
     if (defectiveMode) {
       scores.Blue++;
       document.getElementById('blueScore').textContent = scores.Blue;
