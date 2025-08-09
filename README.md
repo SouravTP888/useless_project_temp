@@ -46,16 +46,16 @@ For Software:
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1]("https://drive.google.com/file/d/1K30PGpfvHJ8OIWKOvff9Imm3INYm5yKy/view?usp=drive_link")
+![Screenshot1](SS1.jpg)
 The Home page of our site.
 
-![Screenshot2]("SS3.jpg")
+![Screenshot2](SS3.jpg)
 The defective game which only counters blue.
 
-![Screenshot3]("SS4.jpg")
+![Screenshot3](SS4.jpg)
 The secret button to be found at the top right corner.
 
-![screenshot4]("SS2.jpg")
+![screenshot4](SS2.jpg)
 The real game which works perfectly.
 
 # Diagrams
